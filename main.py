@@ -16,10 +16,9 @@ def main(args):
     input_files = os.listdir(args.input)
 
     print(f'Initiating sort of folder: {args.input}. Sorted folder: {args.output}')
-    # 2. for each file:
+    # 2. For each file... get its year and month. Put in in year -> month path inside sorted folder.
     for idx, filename in enumerate(input_files):
         print(f"Copying file: {idx+1}/{len(input_files)}", end="\r")
-
 
         # Get date from filename. Format: YYYYMMDD
         datestr = filename.split('_')[1]
@@ -38,18 +37,11 @@ def main(args):
         shutil.copy(src_path, dest_path)
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description="<Script description>")
+    parser = argparse.ArgumentParser(description="Takes unsorted media files in one folder and sorts them into another folder.")
     
     parser.add_argument("-i", "--input", type=str, required=True, help="Input folder of unsorted media files.")
     parser.add_argument("-o", "--output", type=str, required=True, help="Output folder of sorted media files. \
         This folder is created if it does not exist.")
 
-
-
-    parser.add_argument("-s", "--single", type=str, help="")
-    parser.add_argument("-m", "--multi", type=str, nargs=2, help="")
-    parser.add_argument("-l", "--list", type=int, nargs='+', help="", default=[])
-    parser.add_argument("-b", "--boolean", help="", action='store_true')
-    
     args = parser.parse_args()
     main(args)
